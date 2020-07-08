@@ -2,18 +2,21 @@ import pandas as pd
 from functools import reduce
 import numpy
 
+####IO Process
 io = 'D:/项目/HL28/Data_parse/BT01426_tidy_data.xlsx'
 io1 = 'D:/项目/HL28/HL_wafer_list.xlsx'
 io2 = 'D:/项目/HL28/HL28_CP_config.xlsx'
-
 
 data = pd.read_excel(io)
 conner = pd.read_excel(io1)
 bin = pd.read_excel(io2,sheet_name='01.M125_softbin')
 
+
+####Pick data
 data = data.iloc[:,[1,2,3,4,5,6,7,8,9]]
 data = data.rename(columns = {'WaferID':'Wafer'})
 
+####Data process
 bin_df = bin[['HardBin','SoftBin','Bin']]
 bin.drop_duplicates(['HardBin','SoftBin','Bin'])[['HardBin','SoftBin','Bin']]
 bin_df = bin_df.dropna()
